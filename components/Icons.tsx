@@ -76,3 +76,23 @@ export const ScaryFaceIcon: React.FC<IconProps> = ({ size = 64, className = '' }
       <path d="M10 16a3.5 3.5 0 0 0 4 0" />
     </svg>
 );
+
+export const GhostIcon: React.FC<IconProps> = ({ size = 64, className = '' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} width={size} height={size} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.78 1.78 0 0 0 -3.1 -1.4v-7" />
+        <path d="M10 10h.01" />
+        <path d="M14 10h.01" />
+        <path d="M10 14a3.5 3.5 0 0 0 4 0" />
+    </svg>
+);
+
+export const SkullIcon: React.FC<IconProps> = ({ size = 64, className = '' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} width={size} height={size} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 1c-6 0 -9 4 -9 9c0 4.5 3 8 6 8s6 -3.5 6 -8c0 -5 -3 -9 -9 -9z" transform="rotate(-45 12 12)" />
+        <path d="M12 1c-6 0 -9 4 -9 9c0 4.5 3 8 6 8s6 -3.5 6 -8c0 -5 -3 -9 -9 -9z" transform="rotate(45 12 12)" />
+        <path d="M10 14v3h4v-3h-4z" />
+        <path d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-1z" />
+    </svg>
+);

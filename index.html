@@ -39,6 +39,29 @@
             animation: jump-scare 0.7s ease-in-out forwards;
         }
 
+        @keyframes ghostly-float {
+            0% { transform: translateY(50px) scale(0.8); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-50px) scale(1.2); opacity: 0; }
+        }
+        .animate-ghostly-float {
+            animation: ghostly-float 1.5s ease-in-out forwards;
+        }
+
+        @keyframes sudden-glitch {
+            0% { transform: translate(0, 0); clip-path: inset(10% 0 80% 0); opacity: 1;}
+            10% { transform: translate(-5px, 5px); clip-path: inset(80% 0 5% 0); }
+            20% { transform: translate(5px, -5px); clip-path: inset(40% 0 40% 0); }
+            30% { transform: translate(-5px, 5px); clip-path: inset(90% 0 2% 0); }
+            40% { transform: translate(5px, -5px); clip-path: inset(25% 0 50% 0); }
+            50% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+        .animate-sudden-glitch {
+            animation: sudden-glitch 1s forwards;
+        }
+
         @keyframes screen-shake {
             0% { transform: translate(0, 0) rotate(0); }
             10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px) rotate(-1deg); }

@@ -21,7 +21,7 @@ const CompletedPage: React.FC<PageProps> = ({ navigate }) => {
             <div className="p-6 bg-purple-900/50 rounded-lg text-left space-y-4">
                  <h2 className="text-4xl font-bold text-yellow-400 flex items-center gap-3"><RewardIcon/> Rewards:</h2>
                  <ul className="list-disc list-inside space-y-2 text-lg text-gray-200 font-sans">
-                    <li><b>Kids:</b> candy bag + arcade tokens + entry to win a free family visit.</li>
+                    <li><b>Kids:</b> lollipop or candy &amp; a free pass to bring your friend to skate.</li>
                     <li><b>Adults:</b> discover and purchase a secret Halloween cocktail or mocktail at EXIT Lounge.</li>
                  </ul>
             </div>

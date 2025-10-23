@@ -1,12 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { PageProps } from '../types';
-import { ScaryFaceIcon } from './Icons';
+import { ScaryFaceIcon, GhostIcon, SkullIcon } from './Icons';
 
-// A base64 encoded scream sound to avoid external file dependencies.
-const SCARE_SOUND = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='; // A short, safe pop/click sound. A real scream would be too large.
+// NOTE: These are short, safe placeholder sounds.
+// For more dramatic effects, you can record your own sounds, encode them to base64, and replace these strings.
+const SCARE_SOUND_FACE = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+const SCARE_SOUND_GHOST = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAA='; // Slightly different pop
+const SCARE_SOUND_SKULL = 'data:audio/wav;base64,UklGRjwAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YRAAAABUaGlzIGlzIGEgcGxhY2Vob2xkZXI='; // Different again
 
 const TrickPage: React.FC<PageProps> = ({ navigate }) => {
     const [scareFinished, setScareFinished] = useState(false);
+
+    // useMemo ensures the scare is chosen only once when the component first renders.
+    const selectedScare = useMemo(() => {
+        const scares = [
+            { icon: ScaryFaceIcon, sound: SCARE_SOUND_FACE, animation: 'animate-jump-scare', background: 'bg-red-900 animate-ping' },
+            { icon: GhostIcon, sound: SCARE_SOUND_GHOST, animation: 'animate-ghostly-float', background: 'bg-blue-900/50 animate-pulse' },
+            { icon: SkullIcon, sound: SCARE_SOUND_SKULL, animation: 'animate-sudden-glitch', background: 'bg-white/20' },
+        ];
+        const randomIndex = Math.floor(Math.random() * scares.length);
+        return scares[randomIndex];
+    }, []);
 
     useEffect(() => {
         // --- The Scare Sequence ---
@@ -15,9 +29,9 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
             navigator.vibrate([100, 50, 200]);
         }
         
-        // 2. Play the sound
+        // 2. Play the selected sound
         try {
-            const audio = new Audio(SCARE_SOUND);
+            const audio = new Audio(selectedScare.sound);
             audio.play();
         } catch (error) {
             console.error("Audio playback failed.", error);
@@ -29,7 +43,7 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
         }, 1500); // The scare lasts for 1.5 seconds
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [selectedScare]);
 
     const handleRestart = () => {
         localStorage.removeItem('pumpkinQuestProgress');
@@ -37,10 +51,11 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
     };
 
     if (!scareFinished) {
+        const ScareIcon = selectedScare.icon;
         return (
             <div className="fixed inset-0 bg-black flex items-center justify-center z-50 overflow-hidden animate-screen-shake">
-                <div className="absolute inset-0 bg-red-900 animate-ping opacity-30"></div>
-                <ScaryFaceIcon size={300} className="text-white animate-jump-scare" />
+                <div className={`absolute inset-0 opacity-30 ${selectedScare.background}`}></div>
+                <ScareIcon size={300} className={`text-white ${selectedScare.animation}`} />
             </div>
         );
     }
