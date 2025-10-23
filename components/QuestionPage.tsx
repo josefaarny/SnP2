@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { GAME_DATA } from '../constants/gameData';
 import QrScanner from './QrScanner';
@@ -48,20 +49,24 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
         }
     };
     
-    const handleScanSuccess = useCallback((scannedUrl: string) => {
+    const handleScanSuccess = useCallback((scannedText: string) => {
         setShowScanner(false);
         try {
-            // Use a regular expression to robustly find the 'step' parameter.
-            // This is more reliable than the URL constructor if the scanned text 
-            // isn't a full, valid URL (e.g., just "/?step=2").
-            const match = scannedUrl.match(/[?&]step=([^&]+)/);
-            const newStep = match ? match[1] : null;
+            // First, try the robust regex to find "step=X" in a URL.
+            const match = scannedText.match(/[?&]step=([^&]+)/);
+            const stepFromUrl = match ? match[1] : null;
+            
+            // As a fallback, check if the scanned text is just a number or "trick".
+            const trimmedText = scannedText.trim().toLowerCase();
+            const isNumeric = /^\d+$/.test(trimmedText);
+            const isTrick = trimmedText === 'trick';
 
-            if (newStep) {
-                // Navigate internally without a page reload
-                navigate(newStep);
+            if (stepFromUrl) {
+                navigate(stepFromUrl);
+            } else if (isNumeric || isTrick) {
+                navigate(trimmedText);
             } else {
-                // If the URL is valid but has no step, it's a "trick"
+                // If the text is anything else (e.g., a random website), it's a trick.
                 navigate('trick');
             }
         } catch (error) {
