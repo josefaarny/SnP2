@@ -50,7 +50,9 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
     
     const handleScanSuccess = useCallback((scannedUrl: string) => {
         try {
-            const url = new URL(scannedUrl);
+            // By providing window.location.href as a base, we can correctly
+            // parse both full URLs and relative paths (e.g., "/?step=2").
+            const url = new URL(scannedUrl, window.location.href);
             const newStep = url.searchParams.get('step');
             if (newStep) {
                 // Navigate internally without a page reload
