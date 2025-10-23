@@ -51,7 +51,7 @@ const scares = [
     {
         name: 'The Creepy Doll',
         Icon: DollIcon,
-        sound: 'data:audio/wav;base64,UklGRlAAAABXQVZFZm10IBAAAAABAAIARKwAACLWAEAEABAAZGF0YSJIAAAAAAAAaGhoaGhoY2NjY2NjY2NjY2NjY2NjY2NjY2hoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGg=',
+        sound: 'data:audio/wav;base64,UklGRlAAAABXQVZFZm10IBAAAAABAAIARKwAACLWAEAEABAAZGF0YSJIAAAAAAAAaGhoaGhoY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2hoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGg=',
         animation: 'animate-doll-appear',
         bgColor: 'bg-black',
         iconColor: 'text-gray-300',
@@ -95,7 +95,7 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
         const audio = new Audio(selectedScare.sound);
         audio.play().catch(e => console.error("Audio playback failed. User interaction might be required.", e));
 
-        // Vibrate the phone for a haptic effect
+        // Vibrate the phone for a haptic effect. Note: Not supported on iOS.
         if ('vibrate' in navigator) {
             navigator.vibrate([200, 100, 200]); // Vibrate, pause, vibrate
         }
@@ -125,7 +125,7 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
     return (
         <div className="text-center space-y-6 p-8 bg-black/40 backdrop-blur-md rounded-2xl shadow-lg border border-red-700/50 animate-screen-shake">
             <div className="text-7xl">👻</div>
-            <h1 className="text-6xl font-bold text-red-500 drop-shadow-lg">TRICK!</h1>
+            <h1 className="font-['Creepster'] text-6xl font-bold text-red-500 drop-shadow-lg">TRICK!</h1>
             <div className="text-lg text-gray-200 space-y-3 font-sans">
                 <p>You scanned a fake QR code or tried to skip a step!</p>
                 <p>Your progress has been reset. Better luck next time!</p>
