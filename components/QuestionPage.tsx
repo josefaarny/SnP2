@@ -101,7 +101,7 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
     }
     
     return (
-        <div className="text-center space-y-6 p-8 bg-black/40 backdrop-blur-md rounded-2xl shadow-lg border border-orange-500/50">
+        <div className="text-center space-y-6 p-8 bg-black/40 backdrop-blur-md rounded-2xl shadow-lg border border-red-700/50">
              <h2 className="text-3xl font-semibold text-gray-300">Step {stepData.id}: <span className="text-yellow-400">{stepData.location}</span></h2>
             <p className="text-4xl font-bold font-sans">{stepData.question}</p>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -110,11 +110,11 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
                     placeholder="Type your answer here..."
-                    className="w-full text-center bg-gray-900/50 border-2 border-purple-500 text-white text-2xl rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition font-sans"
+                    className="w-full text-center bg-gray-900/50 border-2 border-purple-500 text-white text-2xl rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition font-sans"
                 />
                 <button 
                     type="submit"
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-md disabled:opacity-50"
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-md disabled:opacity-50"
                     disabled={!answer}
                 >
                     Submit Answer

@@ -46,13 +46,13 @@ const TrickPage: React.FC<PageProps> = ({ navigate }) => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center text-center p-8 bg-black/40 backdrop-blur-md rounded-2xl border border-red-500/50 shadow-lg">
-            <h1 className="text-8xl font-bold text-red-500 drop-shadow-lg">Tricked!</h1>
+        <div className="w-full h-full flex flex-col items-center justify-center text-center p-8 bg-black/60 backdrop-blur-md rounded-2xl border border-red-800/50 shadow-lg shadow-red-500/20">
+            <h1 className="text-8xl font-bold text-red-500 drop-shadow-[0_2px_2px_rgba(255,0,0,0.5)]" style={{textShadow: '0 0 10px #ff0000, 0 0 20px #ff0000'}}>Tricked!</h1>
             <p className="mt-4 text-2xl text-white font-sans">That wasn't the right QR code.</p>
             <p className="mt-2 text-xl text-gray-300 font-sans">Your progress has been reset. Return to the Reception to restart your quest.</p>
             <button 
                 onClick={handleRestart}
-                className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-md"
+                className="mt-8 bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all transform hover:scale-105 shadow-md shadow-red-900 hover:shadow-red-700"
             >
                 Return to Start
             </button>

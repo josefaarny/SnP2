@@ -28,7 +28,7 @@ const RulesPage: React.FC<PageProps> = ({ navigate }) => {
             </div>
             <button
                 onClick={() => navigate('1')}
-                className="w-full text-center block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-md">
+                className="w-full text-center block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-md">
                 Start the Hunt
             </button>
         </div>

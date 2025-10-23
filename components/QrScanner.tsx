@@ -74,10 +74,10 @@ const QrScanner: React.FC<QrScannerProps> = ({ onClose, onScanSuccess }) => {
                 <div id="qr-reader-container" className="w-full rounded-lg overflow-hidden" style={{ transform: 'scale(1.05)' }}></div>
                 <div className="absolute inset-0 flex items-center justify-center p-6 pointer-events-none">
                     <div className="w-full max-w-[260px] h-[260px] relative animate-pulse-bright">
-                        <div className="absolute -top-1 -left-1 w-10 h-10 border-t-4 border-l-4 border-orange-500 rounded-tl-lg"></div>
-                        <div className="absolute -top-1 -right-1 w-10 h-10 border-t-4 border-r-4 border-orange-500 rounded-tr-lg"></div>
-                        <div className="absolute -bottom-1 -left-1 w-10 h-10 border-b-4 border-l-4 border-orange-500 rounded-bl-lg"></div>
-                        <div className="absolute -bottom-1 -right-1 w-10 h-10 border-b-4 border-r-4 border-orange-500 rounded-br-lg"></div>
+                        <div className="absolute -top-1 -left-1 w-10 h-10 border-t-4 border-l-4 border-red-500 rounded-tl-lg"></div>
+                        <div className="absolute -top-1 -right-1 w-10 h-10 border-t-4 border-r-4 border-red-500 rounded-tr-lg"></div>
+                        <div className="absolute -bottom-1 -left-1 w-10 h-10 border-b-4 border-l-4 border-red-500 rounded-bl-lg"></div>
+                        <div className="absolute -bottom-1 -right-1 w-10 h-10 border-b-4 border-r-4 border-red-500 rounded-br-lg"></div>
                     </div>
                 </div>
                  <button 
