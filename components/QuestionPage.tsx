@@ -49,11 +49,14 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
     };
     
     const handleScanSuccess = useCallback((scannedUrl: string) => {
+        setShowScanner(false);
         try {
-            // By providing window.location.href as a base, we can correctly
-            // parse both full URLs and relative paths (e.g., "/?step=2").
-            const url = new URL(scannedUrl, window.location.href);
-            const newStep = url.searchParams.get('step');
+            // Use a regular expression to robustly find the 'step' parameter.
+            // This is more reliable than the URL constructor if the scanned text 
+            // isn't a full, valid URL (e.g., just "/?step=2").
+            const match = scannedUrl.match(/[?&]step=([^&]+)/);
+            const newStep = match ? match[1] : null;
+
             if (newStep) {
                 // Navigate internally without a page reload
                 navigate(newStep);
@@ -61,10 +64,9 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ stepId, navigate }) => {
                 // If the URL is valid but has no step, it's a "trick"
                 navigate('trick');
             }
-        } catch (_) {
-            console.error("Scanned QR is not a valid URL.");
-            alert("Scanned QR code is not a valid link.");
-            setShowScanner(false);
+        } catch (error) {
+            console.error("An error occurred while processing the scanned QR code:", error);
+            alert("Could not process the scanned QR code.");
         }
     }, [navigate]);
 
