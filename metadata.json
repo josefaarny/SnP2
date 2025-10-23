@@ -1,0 +1,7 @@
+{
+  "name": "Pumpkin Quest on Wheels",
+  "description": "A fun, Halloween-themed QR code scavenger hunt. Solve clues and scan QR codes to find your way to the final prize.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
