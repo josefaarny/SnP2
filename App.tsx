@@ -4,6 +4,7 @@ import RulesPage from './components/RulesPage';
 import TrickPage from './components/TrickPage';
 import QuestionPage from './components/QuestionPage';
 import CompletedPage from './components/CompletedPage';
+import AdminPage from './components/AdminPage'; // New import for the admin panel
 import { GAME_DATA } from './constants/gameData';
 
 const App: React.FC = () => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
     // Function to update URL and state without reloading
     const navigate = useCallback((newStep: string) => {
         const url = new URL(window.location.href);
+        url.searchParams.delete('admin'); // Ensure admin flag is cleared on navigation
         if (newStep === '0' || newStep === null) {
             url.search = '';
         } else {
@@ -39,6 +41,11 @@ const App: React.FC = () => {
     }, []);
 
     const getPage = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('admin') === 'true') {
+            return <AdminPage navigate={navigate} />;
+        }
+        
         const savedProgress = parseInt(localStorage.getItem('pumpkinQuestProgress') || '0', 10);
 
         if (step === null || step === '0') {
