@@ -5,22 +5,28 @@ import { CameraIcon, VolumeUpIcon, SilentModeOffIcon } from './Icons';
 const WelcomePage: React.FC<PageProps> = ({ navigate }) => {
     const [isReady, setIsReady] = useState(false);
 
-    const handleReady = async () => {
+    const handleReady = () => {
         // Prime the audio for iOS by playing a silent sound on user interaction.
-        try {
-            const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAA');
-            await audio.play();
-        } catch (err) {
+        // We don't await this, as it's just to wake up the audio context.
+        const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAA');
+        audio.play().catch(err => {
             console.warn("Could not prime audio. Playback might require direct user interaction on this device.", err);
-        }
+        });
 
-        // Request camera permissions early.
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            stream.getTracks().forEach(track => track.stop());
-        } catch (err) {
-            console.warn("Camera permission was denied initially. It will be requested again when the scanner is opened.", err);
-        }
+        // Request camera permissions early without waiting for the user's response.
+        // The browser will show the prompt, and the user can interact with it
+        // while the app continues to the next screen.
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                // We got permission, so we can stop the track immediately as we don't need it yet.
+                stream.getTracks().forEach(track => track.stop());
+            })
+            .catch(err => {
+                // User likely denied permission. It will be requested again when the scanner is opened.
+                console.warn("Camera permission was denied initially or an error occurred.", err);
+            });
+
+        // Immediately move to the next screen.
         setIsReady(true);
     };
 
